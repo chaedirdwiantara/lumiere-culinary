@@ -1,0 +1,1 @@
+self.__REACT_LOADABLE_MANIFEST='{"app\\\\api-docs\\\\page.tsx -> swagger-ui-react":{"id":3844,"files":["static/chunks/949fd6f9.429f19e28faacb25.js","static/chunks/524.d5a2ad7228698b58.js"]}}';
