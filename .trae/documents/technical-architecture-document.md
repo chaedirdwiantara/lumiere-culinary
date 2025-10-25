@@ -27,70 +27,82 @@
 
 ## 2. Technology Description
 
-- Frontend: Next.js@14 + React@18 + TypeScript + Tailwind CSS@3 + Framer Motion
-- Backend: Next.js API Routes + Supabase SDK
-- Database: Supabase (PostgreSQL)
-- Authentication: Supabase Auth
-- File Storage: Supabase Storage
-- API Documentation: Swagger UI + OpenAPI 3.0
-- Deployment: Vercel (Serverless)
+* Frontend: Next.js\@14 + React\@18 + TypeScript + Tailwind CSS\@3 + Framer Motion
+
+* Backend: Next.js API Routes + Supabase SDK
+
+* Database: Supabase (PostgreSQL)
+
+* Authentication: Supabase Auth
+
+* File Storage: Supabase Storage
+
+* API Documentation: Swagger UI + OpenAPI 3.0
+
+* Deployment: Vercel (Serverless)
 
 ## 3. Route Definitions
 
-| Route | Purpose |
-|-------|---------|
-| / | Home page, displays full-screen food photos with drag-scroll |
-| /work | Work page, displays food photography portfolio with filters |
-| /about | About page, displays photographer/chef information and team |
-| /admin | Admin login page |
-| /admin/dashboard | Admin dashboard with overview statistics |
-| /admin/photos | Food photo management interface |
-| /admin/categories | Food category management interface |
-| /admin/media | Media library management |
-| /api-docs | Swagger API documentation interface |
+| Route             | Purpose                                                      |
+| ----------------- | ------------------------------------------------------------ |
+| /                 | Home page, displays full-screen food photos with drag-scroll |
+| /work             | Work page, displays food photography portfolio with filters  |
+| /about            | About page, displays photographer/chef information and team  |
+| /admin            | Admin login page                                             |
+| /admin/dashboard  | Admin dashboard with overview statistics                     |
+| /admin/photos     | Food photo management interface                              |
+| /admin/categories | Food category management interface                           |
+| /admin/media      | Media library management                                     |
+| /api-docs         | Swagger API documentation interface                          |
 
 ## 4. API Definitions
 
 ### 4.1 Core API
 
 **Food Photo Management**
+
 ```
 GET /api/photos
 ```
 
 Request:
-| Param Name| Param Type  | isRequired  | Description |
-|-----------|-------------|-------------|-------------|
-| category  | string      | false       | Filter by food category |
-| cuisine   | string      | false       | Filter by cuisine type |
-| limit     | number      | false       | Number of photos to return |
+
+| Param Name | Param Type | isRequired | Description                |
+| ---------- | ---------- | ---------- | -------------------------- |
+| category   | string     | false      | Filter by food category    |
+| cuisine    | string     | false      | Filter by cuisine type     |
+| limit      | number     | false      | Number of photos to return |
 
 Response:
-| Param Name| Param Type  | Description |
-|-----------|-------------|-------------|
-| success   | boolean     | Request status |
-| data      | Photo[]     | Array of photo objects |
+
+| Param Name | Param Type | Description            |
+| ---------- | ---------- | ---------------------- |
+| success    | boolean    | Request status         |
+| data       | Photo\[]   | Array of photo objects |
 
 ```
 POST /api/photos
 ```
 
 Request:
-| Param Name| Param Type  | isRequired  | Description |
-|-----------|-------------|-------------|-------------|
-| dish_name | string      | true        | Name of the dish |
-| category  | string      | true        | Food category |
-| cuisine_type | string   | false       | Type of cuisine |
-| description | string    | false       | Photo description |
-| image_url | string      | true        | URL of the photo |
+
+| Param Name    | Param Type | isRequired | Description       |
+| ------------- | ---------- | ---------- | ----------------- |
+| dish\_name    | string     | true       | Name of the dish  |
+| category      | string     | true       | Food category     |
+| cuisine\_type | string     | false      | Type of cuisine   |
+| description   | string     | false      | Photo description |
+| image\_url    | string     | true       | URL of the photo  |
 
 Response:
-| Param Name| Param Type  | Description |
-|-----------|-------------|-------------|
-| success   | boolean     | Request status |
-| data      | Photo       | Created photo object |
+
+| Param Name | Param Type | Description          |
+| ---------- | ---------- | -------------------- |
+| success    | boolean    | Request status       |
+| data       | Photo      | Created photo object |
 
 **Awards Management**
+
 ```
 GET /api/awards
 POST /api/awards
@@ -99,35 +111,44 @@ DELETE /api/awards/[id]
 ```
 
 **Authentication**
+
 ```
 POST /api/auth/login
 ```
+
 Request:
-| Param Name | Param Type | isRequired | Description |
-|------------|------------|------------|-------------|
-| email | string | true | Admin email |
-| password | string | true | Admin password |
+
+| Param Name | Param Type | isRequired | Description    |
+| ---------- | ---------- | ---------- | -------------- |
+| email      | string     | true       | Admin email    |
+| password   | string     | true       | Admin password |
 
 **Media Upload**
+
 ```
 POST /api/media/upload
 ```
+
 Request: FormData with file
 Response:
-| Param Name | Param Type | Description |
-|------------|------------|-------------|
-| url | string | Uploaded file URL |
-| path | string | File path in storage |
+
+| Param Name | Param Type | Description          |
+| ---------- | ---------- | -------------------- |
+| url        | string     | Uploaded file URL    |
+| path       | string     | File path in storage |
 
 **API Documentation**
+
 ```
 GET /api-docs
 ```
+
 Swagger UI interface untuk dokumentasi API lengkap dengan interactive testing
 
 ```
 GET /api/swagger.json
 ```
+
 OpenAPI 3.0 specification dalam format JSON
 
 ## 5. Server Architecture Diagram
@@ -207,6 +228,7 @@ erDiagram
 ### 6.2 Data Definition Language
 
 **Photos Table (photos)**
+
 ```sql
 -- Create table
 CREATE TABLE photos (
@@ -232,6 +254,7 @@ GRANT ALL PRIVILEGES ON photos TO authenticated;
 ```
 
 **Categories Table (categories)**
+
 ```sql
 -- Create table
 CREATE TABLE categories (
@@ -252,6 +275,7 @@ GRANT ALL PRIVILEGES ON categories TO authenticated;
 ```
 
 **Film Awards Junction Table**
+
 ```sql
 -- Create film_awards junction table
 CREATE TABLE film_awards (
@@ -273,6 +297,7 @@ GRANT ALL PRIVILEGES ON film_awards TO authenticated;
 ```
 
 **Film Quotes Table**
+
 ```sql
 -- Create film_quotes table
 CREATE TABLE film_quotes (
@@ -293,6 +318,7 @@ GRANT ALL PRIVILEGES ON film_quotes TO authenticated;
 ```
 
 **Film Media Table**
+
 ```sql
 -- Create film_media table
 CREATE TABLE film_media (
@@ -315,6 +341,7 @@ GRANT ALL PRIVILEGES ON film_media TO authenticated;
 ```
 
 **Initial Data**
+
 ```sql
 -- Insert sample films
 INSERT INTO films (title, director, year, category, description, slug) VALUES
@@ -328,3 +355,4 @@ INSERT INTO awards (name, festival, year, category) VALUES
 ('Jerusalem Film Festival', 'Jerusalem Film Festival', 2014, 'Feature Film'),
 ('World Premiere', 'POV Magazine', 2024, 'Documentary');
 ```
+
